@@ -18,7 +18,7 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _context.motoristas.ToListAsync());
