@@ -24,8 +24,9 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
             return Ok(await _context.motoristas.ToListAsync());
         }
 
-        
-        [HttpGet("{id}")] // Buscar motorista por el ID 
+
+        [HttpGet]
+        [Route("GetById/{id}")]// Buscar motorista por el ID 
         public async Task<IActionResult> GetById(int id)
         {
             var motorista = await _context.motoristas.FindAsync(id);
@@ -37,7 +38,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
         
-        [HttpPost] // Agregar un nuevo motorista
+        [HttpPost]
+        [Route("Añadir")]// Agregar un nuevo motorista
         public async Task<IActionResult> Create([FromBody] motoristas motorista)
         {
             if (motorista == null)
@@ -51,7 +53,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
         
-        [HttpPut("{id}")] // metodo para actulizar motorista
+        [HttpPut]
+        [Route("Actualizar/{id}")]// metodo para actulizar motorista
         public async Task<IActionResult> Update(int id, [FromBody] motoristas motorista)
         {
             if (id != motorista.motoristaId)
@@ -72,7 +75,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
        
-        [HttpDelete("{id}")] // metodo de eliminacion 
+        [HttpDelete]
+        [Route("Eliminar/{id}")]// metodo de eliminacion 
         public async Task<IActionResult> Delete(int id)
         {
             var motorista = await _context.motoristas.FindAsync(id);
@@ -87,7 +91,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
        
-        [HttpGet("buscar")] // metodo de filtrado para nombre de motorista
+        [HttpGet]
+        [Route("Buscar")]// metodo de filtrado para nombre de motorista
         public async Task<IActionResult> Search([FromQuery] string nombre)
         {
             if (string.IsNullOrWhiteSpace(nombre))

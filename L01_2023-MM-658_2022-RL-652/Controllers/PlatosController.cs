@@ -26,7 +26,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
             return await _context.platos.ToListAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetById/{id}")]
         public async Task<ActionResult<platos>> GetPlato(int id)
         {
             var plato = await _context.platos.FindAsync(id);
@@ -39,6 +40,7 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
 
 
         [HttpPost]
+        [Route("Añadir")]
         public async Task<ActionResult<platos>> PostPlatos(platos platos)
         {
             _context.platos.Add(platos);
@@ -46,7 +48,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
             return CreatedAtAction(nameof(GetPlato), new { id = platos.platoId }, platos);
         
         }
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("Actualizar/{id}")]
         public async Task<IActionResult> PutPlato(int id, platos plato)
         {
             if (id != plato.platoId)
@@ -75,7 +78,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("Eliminar/{id}")]
         public async Task<IActionResult> DeletePlato(int id)
         {
             var plato = await _context.platos.FindAsync(id);
@@ -90,7 +94,8 @@ namespace L01_2023_MM_658_2022_RL_652.Controllers
         }
 
 
-        [HttpGet("filtrar")]
+        [HttpGet]
+        [Route("Filtrar")]
         public async Task<ActionResult<IEnumerable<platos>>> GetPlatosFiltrados([FromQuery] decimal precioMaximo)
         {
             return await _context.platos.Where(p => p.precio < precioMaximo).ToListAsync();
